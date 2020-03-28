@@ -42,9 +42,16 @@ app.get('/getAllAssets', function(req,res) {
 	require('./get_all_assets.js')(req,res);
 });
 
-// /updateAsset - POST request with a request body of any {url,likes, downloads,setLimasCost}
+/* /updateAsset - POST request with a request body of any {url,likes, downloads,setLimasCost}
+				- Note say if you want to update likes - first /getUserDetails and add +1 to likes and then make a POST request here */
 
-
+/* /getUserDetails - GET request which pulls username from session and returns all details */
+app.get('/getUserDetails', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+	}
+	require('./get_user_details.js')(req,res);
+});
 
 
 

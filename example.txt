@@ -1,0 +1,77 @@
+/getUserAssets
+[{
+	url : 'www.test1.com',
+	likes: 50,
+	downloads: 2,
+	setLimasCost: 300
+},
+{
+	url : 'www.test2.com',
+	likes: 520,
+	downloads: 23,
+	setLimasCost: 2300
+},
+{
+	url : 'www.test3.com',
+	likes: 504,
+	downloads: 2,
+	setLimasCost: 3400
+},
+{
+	url : 'www.test4.com',
+	likes: 0,
+	downloads: 2,
+	setLimasCost: 3
+}]
+
+/getAllAssets
+[{
+	url : 'www.test1.com',
+	likes: 50,
+	downloads: 2,
+	setLimasCost: 300,
+	_id: 'oo'
+},
+{
+	url : 'www.test2.com',
+	likes: 520,
+	downloads: 23,
+	setLimasCost: 2300,
+	_id: 'tooon'
+},
+{
+	url : 'www.test3.com',
+	likes: 504,
+	downloads: 2,
+	setLimasCost: 3400,
+	_id: 'ttt'
+},
+{
+	url : 'www.test4.com',
+	likes: 0,
+	downloads: 2,
+	setLimasCost: 3,
+	_id: 'Good'
+}]
+
+/getUserDetails
+{
+	totalLikes: 4,
+	totalDownloads: 32,
+	totalLimas: 7, 
+	_id: 'Sid'
+}
+
+/login
+- <p> Welcome! </p>
+- <p> Password incorrect </p>
+- <p> Username does not exist </p>
+- <p> Username field cannot be empty </p>
+- <p> Password field cannot be empty </p>
+
+/signup
+
+- <p> New User successfully made </p>
+- <p> Username already exists </p>
+- <p> Username field cannot be empty </p>
+- <p> Password field cannot be empty </p>

@@ -213,6 +213,15 @@ app.post('/newCourse', function(req,res) {
 		return;
 	}
 	require('./new_course.js')(req,res);
-})
+});
+
+app.get('/getEverything', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
+	}
+	require('./get_everything.js')(req,res);
+});
 
 app.listen(constants.port, () => console.log(`Listening on port ${constants.port}!`));

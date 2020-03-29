@@ -24,7 +24,7 @@ module.exports = function(req,res) {
 	require('./make_connection.js').then(function([collection,client]) {
 		client.db(constants.dbName).collection(constants.courseCollectionName).insertOne(updateJson, function(err, response) {
 			if (err) throw err;
-			res.send('<p> Successfully Added </p>');
+			res.status(200).json({ message: 'Successfully Added' });
 				
 		});
 	});

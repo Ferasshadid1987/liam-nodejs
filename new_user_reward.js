@@ -20,7 +20,7 @@ module.exports = function(req,res) {
 					throw err;
 				}
 			
-				res.send('<p> Successfully Added </p>');
+				res.status(200).json({ message: 'Successfully Added' });
 				
 			});
 		});

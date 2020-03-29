@@ -29,7 +29,7 @@ app.get('/login', function(req,res) {
 /* /fetchAllAssets - GET Request */
 app.get('/getAllAssets', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
@@ -41,7 +41,7 @@ app.get('/getAllAssets', function(req,res) {
 /* /getUserAssets - GET request which pulls username from session and returns all assets */
 app.get('/getUserAssets', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
@@ -52,12 +52,12 @@ app.get('/getUserAssets', function(req,res) {
 // /newAsset
 app.post('/newAsset', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
 	if(!req.body.url) {
-		res.send('<p> Please Provide an Asset URL </p>');
+		res.status(500).json({ message: 'Please Provide an Asset URL ' });
 		res.end();
 		return;
 	}
@@ -67,12 +67,12 @@ app.post('/newAsset', function(req,res) {
 // /updateAsset
 app.post('/updateAsset', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
 	if(!req.body.url) {
-		res.send('<p> Please Provide an Asset URL to Update </p>');
+		res.status(500).json({ message: ' Please Provide an Asset URL to Update ' });
 		res.end();
 		return;
 	}
@@ -87,7 +87,7 @@ app.post('/updateAsset', function(req,res) {
 /* /getUserDetails - GET request which pulls username from session and returns all details */
 app.get('/getUserDetails', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
@@ -98,7 +98,7 @@ app.get('/getUserDetails', function(req,res) {
 				- Note say if you want to update likes - first /getUserDetails and add +1 to likes and then make a POST request here */
 app.post('/updateUserDetails', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
@@ -110,22 +110,22 @@ app.post('/updateUserDetails', function(req,res) {
 
 app.post('/newTransaction', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
 	if(!req.body.url) {
-		res.send('<p> Please Provide an Asset URL used in transaction </p>');
+		res.status(500).json({ message: 'Please Provide an Asset URL used in transaction ' });
 		res.end();
 		return;
 	}
 	if(!req.body.action) {
-		res.send('<p> Please provide an action of either like or download </p>');
+		res.status(500).json({ message: 'Please provide an action of either like or download ' });
 		res.end();
 		return;
 	}
 	if(req.body.action != 'like' && req.body.action != 'download') {
-		res.send('<p> Please provide an action of either like or download </p>');
+		res.status(500).json({ message: 'Please provide an action of either like or download ' });
 		res.end();
 		return;
 	}
@@ -136,7 +136,7 @@ app.post('/newTransaction', function(req,res) {
 
 app.get('/getUserTransactions', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
@@ -147,12 +147,12 @@ app.get('/getUserTransactions', function(req,res) {
 
 app.post('/newReward', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
 	if(!req.body.description && !req.body.limas) {
-		res.send('<p> Please provide reward description and limas </p>');
+		res.status(500).json({ message: 'Please provide reward description and limas' });
 		res.end();
 		return;
 	}
@@ -163,7 +163,7 @@ app.post('/newReward', function(req,res) {
 
 app.get('/getUserRewards', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
@@ -173,12 +173,12 @@ app.get('/getUserRewards', function(req,res) {
 // /newCourse
 app.post('/newUserCourse', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
 	if(!req.body.url) {
-		res.send('<p> Please provide course url </p>');
+		res.status(500).json({ message: 'Please provide course url' });
 		res.end();
 		return;
 	}
@@ -188,7 +188,7 @@ app.post('/newUserCourse', function(req,res) {
 // /getUserCourses
 app.get('/getUserCourses', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
@@ -199,7 +199,7 @@ app.get('/getUserCourses', function(req,res) {
 
 app.get('/getAllCourses', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}
@@ -208,7 +208,7 @@ app.get('/getAllCourses', function(req,res) {
 
 app.post('/newCourse', function(req,res) {
 	if(!req.body.url) {
-		res.send('<p> Please provide course url </p>');
+		res.status(500).json({ message: 'Please provide course url' });
 		res.end();
 		return;
 	}
@@ -217,7 +217,7 @@ app.post('/newCourse', function(req,res) {
 
 app.get('/getEverything', function(req,res) {
 	if(!req.session.currUser) {
-		res.send('<p> Login first!! </p>');
+		res.status(500).json({ message: 'Login First!' });
 		res.end();
 		return;
 	}

@@ -7,7 +7,7 @@ module.exports = function(req,res) {
 			require('./return_all_courses.js')([collection,client]).then(function(courses) {
 				var userCourses = [];
 				if(doc.courses.length == 0) {
-					res.send('<p> No courses found for the user </p>');
+					res.status(500).json({ message: 'No courses found for the user' });
 					res.end();
 					return;
 				}

@@ -16,7 +16,7 @@ function createNewUser(username,password,res,req,email) {
 		});
 
 		req.session.currUser = username;
-		res.send('<p> New User successfully made </p>');
+		res.status(200).json({ message: 'New User successfully made ' });
 	});
 }
 
@@ -24,17 +24,17 @@ function createNewUser(username,password,res,req,email) {
 
 module.exports = function(req,res) {
 	if(!req.body.username) {
-		res.send('<p> Username field cannot be empty </p>');
+		res.status(500).json({ message: 'Username field cannot be empty' });
 		res.end();
 		return;
 	}
 	if(!req.body.password) {
-		res.send('<p> Password field cannot be empty </p>');
+		res.status(500).json({ message: 'Password field cannot be empty' });
 		res.end();
 		return;
 	}
 	if(!req.body.email) {
-		res.send('<p> Email field cannot be empty </p>');
+		res.status(500).json({ message: 'Email field cannot be empty' });
 		res.end();
 		return;
 	}
@@ -49,7 +49,7 @@ module.exports = function(req,res) {
 
 	usernameExistsPromise.then(function(usernameExists) {
 		if(usernameExists) {
-			res.send('<p> Username already exists </p>');
+			res.status(500).json({ message: 'Username already exists ' });
 		}
 		createNewUser(username,password,res,req,email);
 	});

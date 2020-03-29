@@ -19,7 +19,7 @@ module.exports = function(req,res) {
 	});
 
 	if(isEmpty(updateJson)) {
-		res.send('<p> No valid key passed </p>');
+		res.status(500).json({ message: 'No valid key passed' });
 		res.end();
 		return;
 	}
@@ -41,7 +41,7 @@ module.exports = function(req,res) {
 				}
 			}
 			if(!flag) {
-				res.send('<p> No such asset URL found </p>');
+				res.status(500).json({ message: ' No such asset URL found' });
 				res.end();
 				return;
 			}
@@ -51,8 +51,7 @@ module.exports = function(req,res) {
 				if(err) {
 					throw err;
 				}
-			
-				res.send('<p> Successfully Updated </p>');
+				res.status(200).json({ message: 'Successfully Updated' });
 			});
 				
 		});

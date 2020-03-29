@@ -1,40 +1,42 @@
 function checkIfPasswordIsCorrect(username,password,res,req) {
-	console.log('3OOOOOOOOOOOO');
 	 require('./get_document_by_username.js')(username).then(function(doc) {
 	 	console.log(doc);
 	 	if(password == doc.password){
 	 		 req.session.currUser = username;
-	 		 res.send('<p> Welcome! </p>') ;
+	 		 res.status(200).json({ message: 'Welcome!' });
+	 		 res.end();
+	 		 return;
 	 	}
-	 	 res.send('<p> Password incorrect </p>');
+	 	 res.status(500).json({ message: 'Password incorrect' });
+	 	 res.end();
+	 	 return;
 	 })
 }
 
 module.exports = function(req,res) {
 	if(!req.query.username) {
-		res.send('<p> Username field cannot be empty </p>');
+		res.status(500).json({ message: ' Username field cannot be empty' });
 		res.end();
 		return;
 	}
 	if(!req.query.password) {
-		res.send('<p> Password field cannot be empty </p>');
+		res.status(500).json({ message: 'Password field cannot be emptyty' });
 		res.end();
 		return;
 	}
 	var username = req.query.username;
 	var password = req.query.password;
 
-	console.log('1OOOOOOOOOOOO');
 	const usernameExistsPromise = require('./get_all_usernames.js')().then(function(usernames) {
 		return (usernames.indexOf(username) != -1);
 	});
 
-	console.log('2OOOOOOOOOOOO');
-
 	usernameExistsPromise.then(function(usernameExists) {
 		console.log(usernameExists);
 		if(!usernameExists) {
-		res.send('<p> Username does not exist </p>');
+			res.status(500).json({ message: 'Username does not exist' });
+			res.end();
+			return;
 		}
 		else {
 		  const passwordCheckPromise = Promise.resolve(checkIfPasswordIsCorrect(username,password,res,req));

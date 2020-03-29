@@ -31,7 +31,7 @@ module.exports = function(req,res) {
 				}
 
 				if(!courseFound) {
-					res.send('<p> No such course exists. Enter valid course url </p>');
+					res.status(500).json({ message: 'No such course exists. Enter valid course url' });
 				}
 
 				var updateUser = {  $set: { courses: doc.courses } }
@@ -47,7 +47,7 @@ module.exports = function(req,res) {
 							throw err;
 						}
 					
-						res.send('<p> Successfully Added </p>');
+						res.status(200).json({ message: 'Successfully Added' });
 						
 					});
 				});

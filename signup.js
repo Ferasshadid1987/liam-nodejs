@@ -16,9 +16,7 @@ function createNewUser(username,password,res,req,email) {
 		});
 
 		req.session.currUser = username;
-		require('./make_connection.js').then(function([collection,client]) {
-			res.send('<p> New User successfully made </p>');
-		});
+		res.send('<p> New User successfully made </p>');
 	});
 }
 
@@ -45,7 +43,7 @@ module.exports = function(req,res) {
 	var password = req.body.password;
 	var email = req.body.email;
 
-	const usernameExistsPromise = require('./get_all_usernames.js').then(function(usernames) {
+	const usernameExistsPromise = require('./get_all_usernames.js')().then(function(usernames) {
 		return (usernames.indexOf(username) != -1);
 	});
 

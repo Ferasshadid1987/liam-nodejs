@@ -9,7 +9,7 @@ function isEmpty(obj) {
 
 
 module.exports = function(req,res) {
-	const valid_keys = ['password', 'firstName', 'lastName', 'email', 'totalLikes', 'totalDownloads', 'totalLimas'];
+	const valid_keys = ['password', 'firstName', 'lastName', 'email', 'totalLikes', 'totalDownloads', 'totalLimas', 'profile'];
 	var updateJson = { ...req.body };
 
 	Object.keys(updateJson).forEach(function(key,index){
@@ -30,12 +30,9 @@ module.exports = function(req,res) {
 			if(err) {
 				throw err;
 			}
-			require('./get_all_documents.js').then(function() {
-				require('./get_document_by_username.js')(username).then(function() {
-					res.send('<p> Successfully Updated </p>');
-				});
-					
-			});
+			
+			res.send('<p> Successfully Updated </p>');
+				
 		});
 	});
 }

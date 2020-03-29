@@ -4,6 +4,8 @@ module.exports = function(req,res) {
 		var dup = { ...doc }
 		console.log(doc);
 		delete dup.assets;
+		delete dup.transactions;
+		delete dup.rewards;
 		res.send(dup);
 	});
 }

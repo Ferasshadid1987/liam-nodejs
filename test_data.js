@@ -5,6 +5,7 @@ db.Test.insert({
    firstName: 'Sid',
    lastName: 'Anand',
    email: 'abc@gmail.com',
+   profile: 'www.xuxu.com',
    totalLikes: 5,
    totalDownloads: 4,
    totalLimas: 1000,

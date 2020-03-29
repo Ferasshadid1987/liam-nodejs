@@ -11,4 +11,4 @@ const fetchCollection = require('./make_connection.js').then(getDocuments, funct
 	return err;
 });
 
-module.exports = fetchCollection;
+module.exports = getDocuments;

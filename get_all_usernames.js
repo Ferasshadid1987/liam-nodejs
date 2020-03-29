@@ -1,15 +1,12 @@
-function getAllUsernames(documents) {
+module.exports = function getAllUsernames() {
 	return new Promise(function(resolve, reject){
-		var usernames = documents.map(function(curr) {
-		return curr._id;
+		require('./make_connection.js').then(function([collection,client]) {
+			require('./get_all_documents.js')([collection,client]).then(function(documents) {
+				var usernames = documents.map(function(curr) {
+				return curr._id;
+				});
+				resolve(usernames);
+			});
 		});
-		resolve(usernames);
 	});
 }
-
-
-const fetchUsernames = require('./get_all_documents.js').then(getAllUsernames, function(err) {
-	return err;
-});
-
-module.exports = fetchUsernames;

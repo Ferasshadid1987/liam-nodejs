@@ -26,6 +26,16 @@ app.get('/login', function(req,res) {
 	require('./login.js')(req,res);
 });
 
+/* /fetchAllAssets - GET Request */
+app.get('/getAllAssets', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+	}
+	require('./get_all_assets.js')(req,res);
+});
+
+// ------------------ User Assets ---------------------------------------
+
 /* /getUserAssets - GET request which pulls username from session and returns all assets */
 app.get('/getUserAssets', function(req,res) {
 	if(!req.session.currUser) {
@@ -34,13 +44,30 @@ app.get('/getUserAssets', function(req,res) {
 	require('./get_user_assets.js')(req,res);
 });
 
-/* /fetchAllAssets - GET Request */
-app.get('/getAllAssets', function(req,res) {
+
+// /newAsset
+app.post('/newAsset', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
 	}
-	require('./get_all_assets.js')(req,res);
+	if(!req.body.url) {
+		res.send('<p> Please Provide an Asset URL </p>');
+	}
+	require('./new_asset.js')(req,res);
 });
+
+// /updateAsset
+app.post('/updateAsset', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+	}
+	if(!req.body.url) {
+		res.send('<p> Please Provide an Asset URL to Update </p>');
+	}
+	require('./update_asset.js')(req,res);
+});
+
+// ----------------- User Details ------------------------------------------
 
 /* /updateAsset - POST request with a request body of any {url,likes, downloads,setLimasCost}
 				- Note say if you want to update likes - first /getUserDetails and add +1 to likes and then make a POST request here */
@@ -55,14 +82,25 @@ app.get('/getUserDetails', function(req,res) {
 
 /* /updateAsset - POST request with a request body of any {url,likes, downloads,setLimasCost}
 				- Note say if you want to update likes - first /getUserDetails and add +1 to likes and then make a POST request here */
-app.post('/updateAssets', function(req,res) {
+app.post('/updateUserDetails', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
 	}
-	require('./update_assets.js')(req,res);
+	require('./update_details.js')(req,res);
 });
 
 
+// /newTranscation
+
+// /getAllTransaction
+
+// /newReward
+
+// /getReward
+
+// /newCourse
+
+// /getCourses
 
 app.listen(constants.port, () => console.log(`Listening on port ${constants.port}!`));
 
@@ -71,4 +109,3 @@ app.listen(constants.port, () => console.log(`Listening on port ${constants.port
 // rewards
 // transaction
 // courses
-// Add extra fields in signup

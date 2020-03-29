@@ -1,4 +1,5 @@
 function checkIfPasswordIsCorrect(username,password,res,req) {
+	console.log('3OOOOOOOOOOOO');
 	 require('./get_document_by_username.js')(username).then(function(doc) {
 	 	console.log(doc);
 	 	if(password == doc.password){
@@ -23,9 +24,12 @@ module.exports = function(req,res) {
 	var username = req.query.username;
 	var password = req.query.password;
 
-	const usernameExistsPromise = require('./get_all_usernames.js').then(function(usernames) {
+	console.log('1OOOOOOOOOOOO');
+	const usernameExistsPromise = require('./get_all_usernames.js')().then(function(usernames) {
 		return (usernames.indexOf(username) != -1);
 	});
+
+	console.log('2OOOOOOOOOOOO');
 
 	usernameExistsPromise.then(function(usernameExists) {
 		console.log(usernameExists);

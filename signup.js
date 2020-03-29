@@ -1,27 +1,49 @@
-function createNewUser(username,password,res) {
-	require('./make_connection.js').then(function(collection) {
-		collection.insertOne({
+const constants = require('./constants.js');
+function createNewUser(username,password,res,req,email) {
+	require('./make_connection.js').then(function([collection,client]) {
+		client.db(constants.dbName).collection(constants.collectionName).insertOne({
 			_id: username,
-			Password: password,
+			password: password,
 			totalLikes: 0,
 			totalDownloads: 0,
 			totalLimas: 100,
-			assets: []
+			assets: [],
+			firstName: req.body.firstName || '',
+			lastName: req.body.lastName || '',
+			email: email,
+			transactions: [],
+			rewards: []
 		});
-		res.send('<p> New User successfully made </p>');
+
+		req.session.currUser = username;
+		require('./make_connection.js').then(function([collection,client]) {
+			res.send('<p> New User successfully made </p>');
+		});
 	});
 }
 
 
 
 module.exports = function(req,res) {
+	if(!req.body.username) {
+		res.send('<p> Username field cannot be empty </p>');
+		res.end();
+		return;
+	}
+	if(!req.body.password) {
+		res.send('<p> Password field cannot be empty </p>');
+		res.end();
+		return;
+	}
+	if(!req.body.email) {
+		res.send('<p> Email field cannot be empty </p>');
+		res.end();
+		return;
+	}
+
 	var username = req.body.username;
 	var password = req.body.password;
-	console.log(req.body);
-	if(!username)
-		res.send('<p> Username field cannot be empty </p>');
-	if(!password)
-		res.send('<p> Password field cannot be empty </p>');
+	var email = req.body.email;
 
 	const usernameExistsPromise = require('./get_all_usernames.js').then(function(usernames) {
 		return (usernames.indexOf(username) != -1);
@@ -31,7 +53,7 @@ module.exports = function(req,res) {
 		if(usernameExists) {
 			res.send('<p> Username already exists </p>');
 		}
-		createNewUser(username,password,res);
+		createNewUser(username,password,res,req,email);
 	});
 }
 

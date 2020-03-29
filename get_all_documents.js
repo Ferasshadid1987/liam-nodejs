@@ -1,6 +1,7 @@
-function getDocuments(collection) {
+const constants = require('./constants.js');
+function getDocuments([collection,client]) {
 	return new Promise(function(resolve, reject){
-		collection.find({}).toArray(function(err, docs) {
+		client.db(constants.dbName).collection(constants.collectionName).find({}).toArray(function(err, docs) {
 			resolve(docs);
 		});
 	});

@@ -53,6 +53,22 @@ app.get('/getUserDetails', function(req,res) {
 	require('./get_user_details.js')(req,res);
 });
 
+/* /updateAsset - POST request with a request body of any {url,likes, downloads,setLimasCost}
+				- Note say if you want to update likes - first /getUserDetails and add +1 to likes and then make a POST request here */
+app.post('/updateAssets', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+	}
+	require('./update_assets.js')(req,res);
+});
 
 
-app.listen(constants.port, () => console.log(`Listening on port ${constants.port}!`))
+
+app.listen(constants.port, () => console.log(`Listening on port ${constants.port}!`));
+
+
+// profile
+// rewards
+// transaction
+// courses
+// Add extra fields in signup

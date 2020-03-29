@@ -10,7 +10,7 @@ module.exports = new Promise(function(resolve, reject){
 		if(err) {
 			reject(err);
 		}
-		resolve(collection);
+		resolve([collection,client]);
 	})
 });
 

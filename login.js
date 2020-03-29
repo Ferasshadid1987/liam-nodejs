@@ -1,7 +1,7 @@
 function checkIfPasswordIsCorrect(username,password,res,req) {
 	 require('./get_document_by_username.js')(username).then(function(doc) {
 	 	console.log(doc);
-	 	if(password == doc.Password){
+	 	if(password == doc.password){
 	 		 req.session.currUser = username;
 	 		 res.send('<p> Welcome! </p>') ;
 	 	}
@@ -10,12 +10,18 @@ function checkIfPasswordIsCorrect(username,password,res,req) {
 }
 
 module.exports = function(req,res) {
+	if(!req.query.username) {
+		res.send('<p> Username field cannot be empty </p>');
+		res.end();
+		return;
+	}
+	if(!req.query.password) {
+		res.send('<p> Password field cannot be empty </p>');
+		res.end();
+		return;
+	}
 	var username = req.query.username;
 	var password = req.query.password;
-	if(!username)
-		res.send('<p> Username field cannot be empty </p>');
-	if(!password)
-		res.send('<p> Password field cannot be empty </p>');
 
 	const usernameExistsPromise = require('./get_all_usernames.js').then(function(usernames) {
 		return (usernames.indexOf(username) != -1);

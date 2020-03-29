@@ -1,8 +1,10 @@
 // To connect from Mongo Shell: mongo "mongodb+srv://cluster0-xelv3.mongodb.net/test"  --username DbAdmin
 db.Test.insert({
-   _id: 'SidTheKid',
-   Password: 'SidTheKid', 
-   Age: 5,
+   _id: 'SidTheKidz',
+   password: 'SidTheKid', 
+   firstName: 'Sid',
+   lastName: 'Anand',
+   email: 'abc@gmail.com',
    totalLikes: 5,
    totalDownloads: 4,
    totalLimas: 1000,
@@ -16,5 +18,7 @@ db.Test.insert({
       likes: 4,
       downloads: 1,
       setLimasCost: 300  
-   }]
+   }],
+   transactions: [],
+   rewards: []
 })

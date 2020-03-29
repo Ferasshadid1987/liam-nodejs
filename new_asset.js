@@ -1,6 +1,6 @@
 const constants = require('./constants.js');
 module.exports = function(req,res) {
-	const valid_keys = ['url', 'likes', 'downloads', 'setLimasCost'];
+	const valid_keys = ['url', 'likes', 'downloads', 'setLimasCost','name'];
 	var updateJson = { ...req.body };
 
 	// Removing redundant keys
@@ -14,7 +14,11 @@ module.exports = function(req,res) {
 
 	// Add default values for keys
 	for(key of valid_keys) {
-		updateJson[key] = updateJson[key] || 0;
+		if(key != 'name')
+			updateJson[key] = updateJson[key] || 0;
+		else
+			updateJson[key] = updateJson[key] || '';
+
 	}
 
 	console.log('ddd');

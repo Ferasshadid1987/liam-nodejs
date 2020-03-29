@@ -9,7 +9,7 @@ function isEmpty(obj) {
 
 
 module.exports = function(req,res) {
-	const valid_keys = ['url', 'likes', 'downloads', 'setLimasCost'];
+	const valid_keys = ['url', 'likes', 'downloads', 'setLimasCost', 'name'];
 	var updateJson = { ...req.body };
 
 	Object.keys(updateJson).forEach(function(key,index){
@@ -36,6 +36,7 @@ module.exports = function(req,res) {
 					asset.likes = updateJson.likes || asset.likes;
 					asset.downloads = updateJson.downloads || asset.downloads;
 					asset.setLimasCost = updateJson.setLimasCost || asset.setLimasCost;
+					asset.name = updateJson.name || asset.name;
 					flag = true;
 					break;
 				}

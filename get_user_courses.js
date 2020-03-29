@@ -19,12 +19,11 @@ module.exports = function(req,res) {
 						console.log(cs['_id']);
 						if(cs['_id'] == course.url) {
 							console.log(course);
-							courseInfo = course;
+							courseInfo = cs;
 						}
 					}
 					console.log(courseInfo);
 					delete courseInfo.usernames;
-					delete courseInfo._id;
 					courseInfo.progress = course.progress;
 					courseInfo.url = course.url;
 					userCourses.push(courseInfo);

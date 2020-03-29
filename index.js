@@ -92,7 +92,30 @@ app.post('/updateUserDetails', function(req,res) {
 
 // /newTranscation
 
+app.post('/newTransaction', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+	}
+	if(!req.body.url) {
+		res.send('<p> Please Provide an Asset URL used in transaction </p>');
+	}
+	if(!req.body.action) {
+		res.send('<p> Please provide an action of either like or download </p>');
+	}
+	if(req.body.action != 'like' || req.body.action != 'download') {
+		res.send('<p> Please provide an action of either like or download </p>');
+	}
+	require('./new_transaction.js')(req,res);
+});
+
 // /getAllTransaction
+
+app.get('/getUserTransaction', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+	}
+	require('./get_user_transaction.js')(req,res);
+});
 
 // /newReward
 

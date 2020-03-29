@@ -29,5 +29,18 @@ db.Test.insert({
       limas: 100,
       description: 'Gift for you',
       url: 'www.gifts.com'
+   }],
+   courses: [{
+      url: 'www.course.com',
+      progress: 80
    }]
+})
+
+db.Courses.insert({
+   _id: 'www.course.com',
+   usernames: ['SidTheKid'],
+   limas: 30,
+   title: 'Something nice',
+   description: 'Something nicer',
+   author: 'Great'
 })

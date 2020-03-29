@@ -6,6 +6,7 @@ module.exports = function(req,res) {
 		delete dup.assets;
 		delete dup.transactions;
 		delete dup.rewards;
+		delete dup.courses;
 		res.send(dup);
 	});
 }

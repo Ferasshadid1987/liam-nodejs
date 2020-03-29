@@ -171,15 +171,48 @@ app.get('/getUserRewards', function(req,res) {
 });
 
 // /newCourse
+app.post('/newUserCourse', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
+	}
+	if(!req.body.url) {
+		res.send('<p> Please provide course url </p>');
+		res.end();
+		return;
+	}
+	require('./new_user_course.js')(req,res);
+});
 
 // /getUserCourses
+app.get('/getUserCourses', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
+	}
+	require('./get_user_courses.js')(req,res);
+});
 
 // /getAllCourses
 
+app.get('/getAllCourses', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
+	}
+	require('./get_all_courses.js')(req,res);
+});
+
+app.post('/newCourse', function(req,res) {
+	if(!req.body.url) {
+		res.send('<p> Please provide course url </p>');
+		res.end();
+		return;
+	}
+	require('./new_course.js')(req,res);
+})
+
 app.listen(constants.port, () => console.log(`Listening on port ${constants.port}!`));
-
-
-// profile
-// rewards
-// transaction
-// courses

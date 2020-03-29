@@ -1,6 +1,6 @@
 const constants = require('./constants.js');
 module.exports = function(req,res) {
-	const valid_keys = ['limas', 'title','description','author']; // except URL
+	const valid_keys = ['limas', 'title','description','author','image']; // except URL
 	var updateJson = { ...req.body };
 
 	// Removing redundant keys
@@ -20,6 +20,7 @@ module.exports = function(req,res) {
 	updateJson['title'] = updateJson['title'] || '';
 	updateJson['description'] = updateJson['description'] || '';
 	updateJson['author'] = updateJson['author'] || '';
+	updateJson['image'] = updateJson['image'] || '';
 
 	require('./make_connection.js').then(function([collection,client]) {
 		client.db(constants.dbName).collection(constants.courseCollectionName).insertOne(updateJson, function(err, response) {

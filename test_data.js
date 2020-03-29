@@ -84,5 +84,6 @@ db.Courses.insert({
    limas: 30,
    title: 'Something nice',
    description: 'Something nicer',
-   author: 'Great'
+   author: 'Great',
+   image: 'www.thumbnail.com'
 })

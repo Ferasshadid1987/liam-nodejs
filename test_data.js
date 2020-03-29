@@ -20,6 +20,14 @@ db.Test.insert({
       downloads: 1,
       setLimasCost: 300  
    }],
-   transactions: [],
-   rewards: []
+   transactions: [{
+      url: 'www.test3.com',
+      action: 'like',
+      limas: 50
+   }],
+   rewards: [{
+      limas: 100,
+      description: 'Gift for you',
+      url: 'www.gifts.com'
+   }]
 })

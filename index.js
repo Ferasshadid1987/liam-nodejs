@@ -30,6 +30,8 @@ app.get('/login', function(req,res) {
 app.get('/getAllAssets', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
 	}
 	require('./get_all_assets.js')(req,res);
 });
@@ -40,6 +42,8 @@ app.get('/getAllAssets', function(req,res) {
 app.get('/getUserAssets', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
 	}
 	require('./get_user_assets.js')(req,res);
 });
@@ -49,9 +53,13 @@ app.get('/getUserAssets', function(req,res) {
 app.post('/newAsset', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
 	}
 	if(!req.body.url) {
 		res.send('<p> Please Provide an Asset URL </p>');
+		res.end();
+		return;
 	}
 	require('./new_asset.js')(req,res);
 });
@@ -60,9 +68,13 @@ app.post('/newAsset', function(req,res) {
 app.post('/updateAsset', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
 	}
 	if(!req.body.url) {
 		res.send('<p> Please Provide an Asset URL to Update </p>');
+		res.end();
+		return;
 	}
 	require('./update_asset.js')(req,res);
 });
@@ -76,6 +88,8 @@ app.post('/updateAsset', function(req,res) {
 app.get('/getUserDetails', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
 	}
 	require('./get_user_details.js')(req,res);
 });
@@ -85,6 +99,8 @@ app.get('/getUserDetails', function(req,res) {
 app.post('/updateUserDetails', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
 	}
 	require('./update_details.js')(req,res);
 });
@@ -95,35 +111,70 @@ app.post('/updateUserDetails', function(req,res) {
 app.post('/newTransaction', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
 	}
 	if(!req.body.url) {
 		res.send('<p> Please Provide an Asset URL used in transaction </p>');
+		res.end();
+		return;
 	}
 	if(!req.body.action) {
 		res.send('<p> Please provide an action of either like or download </p>');
+		res.end();
+		return;
 	}
-	if(req.body.action != 'like' || req.body.action != 'download') {
+	if(req.body.action != 'like' && req.body.action != 'download') {
 		res.send('<p> Please provide an action of either like or download </p>');
+		res.end();
+		return;
 	}
 	require('./new_transaction.js')(req,res);
 });
 
 // /getAllTransaction
 
-app.get('/getUserTransaction', function(req,res) {
+app.get('/getUserTransactions', function(req,res) {
 	if(!req.session.currUser) {
 		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
 	}
 	require('./get_user_transaction.js')(req,res);
 });
 
 // /newReward
 
+app.post('/newReward', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
+	}
+	if(!req.body.description && !req.body.limas) {
+		res.send('<p> Please provide reward description and limas </p>');
+		res.end();
+		return;
+	}
+	require('./new_user_reward.js')(req,res);
+});
+
 // /getReward
+
+app.get('/getUserRewards', function(req,res) {
+	if(!req.session.currUser) {
+		res.send('<p> Login first!! </p>');
+		res.end();
+		return;
+	}
+	require('./get_user_rewards.js')(req,res);
+});
 
 // /newCourse
 
-// /getCourses
+// /getUserCourses
+
+// /getAllCourses
 
 app.listen(constants.port, () => console.log(`Listening on port ${constants.port}!`));
 
